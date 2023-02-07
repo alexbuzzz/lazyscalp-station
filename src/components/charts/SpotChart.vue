@@ -124,16 +124,19 @@ const handleChart = async (mode, tic, int, lim) => {
     })
 
     // Draw fresh candles from websocket
-    const connectionLink = `wss://fstream.binance.com/stream?streams=${tic.toLowerCase()}@kline_${int}`
+    const connectionLink = `wss://stream.binance.com:9443/stream?streams=${tic.toLowerCase()}@kline_${int}`
 
     connection = new WebSocket(connectionLink)
 
     connection.onopen = () => {
-      pongInterval = setInterval(() => {
-        connection.send('pong')
-      }, 1000 * 60)
+      let lineUp
+      let lineDown
 
       connection.onmessage = (data) => {
+        if (data.data === 'ping') {
+          connection.send('pong')
+        }
+
         const parsedData = JSON.parse(data.data)
 
         if (parsedData.data !== undefined) {
@@ -161,6 +164,44 @@ const handleChart = async (mode, tic, int, lim) => {
             color: 'rgba(50, 50, 61, 0.8)',
             time: startTime / 1000,
           })
+
+          // Price line 3% up
+          const price3PercUp = (100 * parseFloat(close)) / 97
+
+          let highMeasureLine = {
+            price: price3PercUp,
+            color: 'rgba(150, 150, 150, 0.2)',
+            lineWidth: 2,
+            lineStyle: 2,
+            axisLabelVisible: false,
+          }
+
+          if (!lineUp) {
+            lineUp = series.createPriceLine(highMeasureLine)
+          } else {
+            highMeasureLine.price = price3PercUp
+            series.removePriceLine(lineUp)
+            lineUp = series.createPriceLine(highMeasureLine)
+          }
+
+          // Price line 3% down
+          const price3PercDown = (100 * parseFloat(close)) / 103
+
+          let lowMeasureLine = {
+            price: price3PercDown,
+            color: 'rgba(150, 150, 150, 0.2)',
+            lineWidth: 2,
+            lineStyle: 2,
+            axisLabelVisible: false,
+          }
+
+          if (!lineDown) {
+            lineDown = series.createPriceLine(lowMeasureLine)
+          } else {
+            lowMeasureLine.price = price3PercDown
+            series.removePriceLine(lineDown)
+            lineDown = series.createPriceLine(lowMeasureLine)
+          }
         }
       }
     }
