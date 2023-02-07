@@ -1,13 +1,13 @@
 <script setup>
-import { ref, watch, computed, onMounted, onBeforeMount } from 'vue'
-import Chart from './Chart.vue'
-import store from '../store'
+import { ref, watch, computed, onBeforeMount } from 'vue'
+import Chart from './SpotChart.vue'
+import store from '../../store'
 
 const props = defineProps(['title', 'limit'])
 
 // Chart data params
 const chartDataParams = ref({
-  ticker: store.getters.getCurrentTicker,
+  ticker: store.getters.getCurrentTicker.replace('1000', '').replace('2', ''),
   interval: '1m',
   candlesLimit: props.limit,
 })
@@ -20,8 +20,8 @@ const currentTicker = computed(() => {
 watch(
   () => currentTicker.value,
   (newValue) => {
-    console.log(newValue)
-    chartDataParams.value.ticker = newValue
+    const formatted = newValue.replace('1000', '').replace('2', '')
+    chartDataParams.value.ticker = formatted
   }
 )
 

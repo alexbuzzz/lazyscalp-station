@@ -39,7 +39,7 @@ const switchToDark = () => {
         <TickersInput />
       </div>
       <div class="time">10:00:00</div>
-      <button @click="switchToDark" class="darkLight right-side-btn">
+      <button @click="switchToDark">
         <IconDark v-if="!isDark" />
         <IconLight v-if="isDark" />
       </button>

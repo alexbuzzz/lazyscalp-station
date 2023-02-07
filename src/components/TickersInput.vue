@@ -1,9 +1,16 @@
 <script setup>
 import store from '../store'
+
+function onKeyDown(event) {
+  if (event.key === 'Enter') {
+    const inputValue = event.target.value.toUpperCase()
+    store.commit('setTicker', inputValue)
+  }
+}
 </script>
 
 <template>
-  <input v-model="store.state.tickers.currentTicker" />
+  <input :value="store.state.tickers.currentTicker" @keydown="onKeyDown" />
 </template>
 
 <style lang="scss" scoped>

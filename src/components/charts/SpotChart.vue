@@ -96,7 +96,7 @@ const handleChart = async (mode, tic, int, lim) => {
     // Get kline from API
 
     const res = await axios.get(
-      `https://fapi.binance.com/fapi/v1/klines?symbol=${tic.toUpperCase()}&interval=${int}&limit=${lim}`
+      `https://api.binance.com/api/v3/klines?symbol=${tic.toUpperCase()}&interval=${int}&limit=${lim}`
     )
 
     res.data.forEach((element, index, array) => {
@@ -115,7 +115,7 @@ const handleChart = async (mode, tic, int, lim) => {
         const volFormatted = {
           time: date,
           value: element[7],
-          color: 'rgba(50, 50, 61, 0.8)',
+          color: 'rgba(50, 50, 61, 0.5)',
         }
 
         chartData.value.kline.push(klineFormatted)

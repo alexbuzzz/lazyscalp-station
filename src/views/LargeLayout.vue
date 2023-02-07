@@ -1,5 +1,7 @@
 <script setup>
-import ChartContainer from '../components/ChartContainer.vue'
+import MainChartContainer from '../components/charts/MainChartContainer.vue'
+import BTCChartContainer from '../components/charts/BTCChartContainer.vue'
+import SpotChartContainer from '../components/charts/SpotChartContainer.vue'
 import DomButtons from '../components/DomButtons.vue'
 import RightPanel from '../components/RightPanel.vue'
 </script>
@@ -10,22 +12,22 @@ import RightPanel from '../components/RightPanel.vue'
     <div class="center">
       <div class="center-1">
         <div class="center-1-left">
-          <ChartContainer title="btc-chart" limit="100" />
+          <BTCChartContainer title="btc-chart" limit="100" />
         </div>
         <div class="center-1-right">
-          <ChartContainer title="spot-chart" limit="100" />
+          <SpotChartContainer title="spot-chart" limit="100" />
         </div>
       </div>
       <div class="center-2">
         <div class="center-2-left">
-          <ChartContainer title="day-chart" limit="100" />
+          <MainChartContainer title="day-chart" limit="100" />
         </div>
         <div class="center-2-right">
-          <ChartContainer title="5min-chart" limit="100" />
+          <MainChartContainer title="5min-chart" limit="100" />
         </div>
       </div>
       <div class="center-3">
-        <ChartContainer title="big-chart" limit="1000" />
+        <MainChartContainer title="big-chart" limit="1000" />
       </div>
       <div class="center-4">
         <DomButtons />
