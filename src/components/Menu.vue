@@ -35,7 +35,6 @@ onClickOutside(menu, () => (isMobileMenuOpen.value = false))
     <span><RouterLink to="/">Large Layout</RouterLink></span>
     <span><RouterLink to="/small">Small Layout</RouterLink></span>
     <span>Watchlist</span>
-    <span>Settings</span>
   </div>
 </template>
 
@@ -83,7 +82,7 @@ onClickOutside(menu, () => (isMobileMenuOpen.value = false))
     color: var(--text-color);
     text-decoration: none;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 16px;
     transition: 0.25s;
     cursor: pointer;
 

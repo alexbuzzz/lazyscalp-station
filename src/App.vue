@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import Menu from './components/Menu.vue'
+import TickersInput from './components/TickersInput.vue'
 import IconDark from './components/icons/IconDark.vue'
 import IconLight from './components/icons/IconLight.vue'
 import { onBeforeMount } from 'vue'
@@ -34,7 +35,9 @@ const switchToDark = () => {
       <div class="equity">Total: 1000$ | Net fee: 900$</div>
     </div>
     <div class="controls">
-      <div class="ticker">ADAUSDT</div>
+      <div class="ticker">
+        <TickersInput />
+      </div>
       <div class="time">10:00:00</div>
       <button @click="switchToDark" class="darkLight right-side-btn">
         <IconDark v-if="!isDark" />
@@ -55,6 +58,7 @@ header {
   height: 30px;
 
   .logo {
+    font-size: 14px;
     margin-left: 10px;
   }
 
@@ -67,11 +71,11 @@ header {
     display: flex;
     align-items: center;
     justify-items: flex-start;
-    width: 230px;
+    width: 332px;
 
     .ticker {
       font-size: 14px;
-      margin-right: 20px;
+      margin-right: 12px;
     }
 
     .time {

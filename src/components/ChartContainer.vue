@@ -1,19 +1,32 @@
 <script setup>
-import { ref, watch, onMounted, onBeforeMount } from 'vue'
+import { ref, watch, computed, onMounted, onBeforeMount } from 'vue'
 import Chart from './Chart.vue'
+import store from '../store'
 
 const props = defineProps(['title', 'limit'])
 
 // Chart data params
 const chartDataParams = ref({
-  ticker: 'BTCUSDT',
+  ticker: store.getters.getCurrentTicker,
   interval: '1m',
   candlesLimit: props.limit,
 })
 
+// Watch ticker changed
+const currentTicker = computed(() => {
+  return store.getters.getCurrentTicker
+})
+
+watch(
+  () => currentTicker.value,
+  (newValue) => {
+    console.log(newValue)
+    chartDataParams.value.ticker = newValue
+  }
+)
+
 // Save to localstorage
 watch(chartDataParams.value, (newValue) => {
-  console.log('Saving to local storage:', newValue)
   localStorage.setItem(props.title, JSON.stringify(newValue.interval))
 })
 

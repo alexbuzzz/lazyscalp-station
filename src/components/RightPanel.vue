@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import RightPanelTickers from './RightPanelTickers.vue'
 
 const selectedTab = ref(localStorage.getItem('selectedTab') || 'tab1')
 
@@ -11,34 +12,45 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div class="right-panel-wrapper">
     <div class="tabs">
       <button @click="selectedTab = 'tab1'">Alerts</button>
       <button @click="selectedTab = 'tab2'">Tickers</button>
     </div>
-    <div v-if="selectedTab === 'tab1'">Tab 1 Content</div>
-    <div v-if="selectedTab === 'tab2'">Tab 2 Content</div>
+    <div class="tab-content" v-if="selectedTab === 'tab1'">Tab 1 Content</div>
+    <div class="tab-content" v-if="selectedTab === 'tab2'">
+      <RightPanelTickers />
+    </div>
   </div>
 </template>
 
 <style lang="scss">
-.tabs {
-  display: flex;
-  gap: 4px;
+.right-panel-wrapper {
+  height: calc(100vh - 40px);
+  overflow: scroll;
+  .tabs {
+    display: flex;
+    gap: 5px;
+    padding: 5px;
 
-  button {
-    flex: 1;
-    padding: 10px;
-    background-color: var(--content-bg);
-    color: var(--text-color);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 8px 0 8px 4px;
+    button {
+      flex: 1;
+      padding: 10px;
+      background-color: var(--content-bg);
+      color: var(--text-color);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 5px 0;
 
-    &:hover {
-      background: var(--content-bg-hover);
+      &:hover {
+        background: var(--content-bg-hover);
+      }
     }
+  }
+
+  .tab-content {
+    padding: 0 5px;
   }
 }
 </style>

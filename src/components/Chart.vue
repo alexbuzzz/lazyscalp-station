@@ -4,28 +4,15 @@ import { createChart } from 'lightweight-charts'
 import axios from 'axios'
 
 const props = defineProps({
-  chartDataParams: {
-    type: Object,
-  },
+  chartDataParams: {},
   autosize: {
     default: true,
-    type: Boolean,
   },
-  chartOptions: {
-    type: Object,
-  },
-  seriesOptions: {
-    type: Object,
-  },
-  volumeOptions: {
-    type: Object,
-  },
-  timeScaleOptions: {
-    type: Object,
-  },
-  priceScaleOptions: {
-    type: Object,
-  },
+  chartOptions: {},
+  seriesOptions: {},
+  volumeOptions: {},
+  timeScaleOptions: {},
+  priceScaleOptions: {},
 })
 
 let series
@@ -213,6 +200,18 @@ watch(
 
 watch(
   () => props.chartDataParams.interval,
+  async () => {
+    await handleChart(
+      'update',
+      props.chartDataParams.ticker,
+      props.chartDataParams.interval,
+      props.chartDataParams.candlesLimit
+    )
+  }
+)
+
+watch(
+  () => props.chartDataParams.ticker,
   async () => {
     await handleChart(
       'update',

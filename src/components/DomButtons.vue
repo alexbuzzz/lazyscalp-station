@@ -1,3 +1,7 @@
+<script setup>
+import store from '../store'
+</script>
+
 <template>
   <div class="dom-wrapper">
     <div class="dom-btn">1</div>
