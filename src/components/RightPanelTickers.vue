@@ -95,7 +95,7 @@ ul {
 .list-item {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid var(--content-bg-hover);
+  border-bottom: 1px solid var(--border-color);
   padding: 5px;
   cursor: pointer;
 

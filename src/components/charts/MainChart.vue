@@ -129,14 +129,14 @@ const handleChart = async (mode, tic, int, lim) => {
     connection = new WebSocket(connectionLink)
 
     connection.onopen = () => {
-      pongInterval = setInterval(() => {
-        connection.send('pong')
-      }, 1000 * 60)
-
       let lineUp
       let lineDown
 
       connection.onmessage = (data) => {
+        if (data.data === 'ping') {
+          connection.send('pong')
+        }
+
         const parsedData = JSON.parse(data.data)
 
         if (parsedData.data !== undefined) {

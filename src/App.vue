@@ -4,6 +4,7 @@ import Menu from './components/Menu.vue'
 import TickersInput from './components/TickersInput.vue'
 import IconDark from './components/icons/IconDark.vue'
 import IconLight from './components/icons/IconLight.vue'
+import store from './store'
 import { onBeforeMount } from 'vue'
 import { ref } from 'vue'
 
@@ -13,6 +14,7 @@ onBeforeMount(() => {
   if (localStorage.getItem('is-dark')) {
     if (localStorage.getItem('is-dark') === 'true') {
       document.documentElement.setAttribute('data-theme', 'dark')
+      isDark.value = true
     }
   }
 })

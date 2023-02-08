@@ -6,7 +6,7 @@
   --text-color: #333;
   --text-color-hover: #222;
   --text-color-muted: #666;
-  --border-color: #cccccc;
+  --border-color: #dcdcdc;
   --button-bg: #f3f3f5;
   --button-bg-hover: #eaeaec;
   --button-text-color: #222;
@@ -27,7 +27,7 @@
   --text-color: #e5e5ea;
   --text-color-hover: #222;
   --text-color-muted: #777;
-  --border-color: rgba(229, 229, 234, 0.16);
+  --border-color: rgba(213, 213, 213, 0.16);
   --button-bg: #09090a;
   --button-bg-hover: #232323;
   --button-text-color: #e5e5ea;

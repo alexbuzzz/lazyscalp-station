@@ -10,7 +10,7 @@ function onKeyDown(event) {
 </script>
 
 <template>
-  <input :value="store.state.tickers.currentTicker" @keydown="onKeyDown" />
+  <input :value="store.getters.getCurrentTicker" @keydown="onKeyDown" />
 </template>
 
 <style lang="scss" scoped>
