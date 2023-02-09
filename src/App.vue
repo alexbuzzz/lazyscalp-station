@@ -65,6 +65,7 @@ header {
   }
 
   .readings {
+    font-size: 14px;
     display: flex;
     gap: 50px;
   }

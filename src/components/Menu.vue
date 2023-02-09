@@ -69,7 +69,7 @@ onClickOutside(menu, () => (isMobileMenuOpen.value = false))
   right: 0;
   width: 300px;
   height: 100%;
-  z-index: 9;
+  z-index: 30;
   background-color: var(--body-bg);
   padding-top: 6rem;
   opacity: 0;
@@ -115,6 +115,6 @@ onClickOutside(menu, () => (isMobileMenuOpen.value = false))
 .show-bg {
   transition: 0.25s;
   opacity: 1;
-  z-index: 8;
+  z-index: 25;
 }
 </style>

@@ -211,6 +211,108 @@ const handleChart = async (mode, tic, int, lim) => {
     series.setData(chartData.value.kline)
     volume = chart.addHistogramSeries(props.volumeOptions)
     volume.setData(chartData.value.vol)
+
+    // Draw levels on chart
+    let tempLevels1h
+    let tempLevels4h
+    let tempLevels1d
+
+    const drawLevels = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:2204')
+        const data = await response.json()
+
+        if (
+          props.chartDataParams.interval !== '1d' &&
+          props.chartDataParams.interval !== '4h'
+        ) {
+          // Remove old lines 1h
+          if (tempLevels1h != null) {
+            tempLevels1h.forEach((element) => {
+              series.removePriceLine(element)
+            })
+          }
+
+          // Create lines 1h
+          const lines1h = data.oneHour[props.chartDataParams.ticker]
+          if (lines1h !== undefined) {
+            tempLevels1h = lines1h
+
+            lines1h.forEach((element) => {
+              let levelsLine1h = {
+                price: element,
+                color: '#333333',
+                lineWidth: 1,
+                lineStyle: 0,
+                axisLabelVisible: false,
+                title: '1h',
+              }
+
+              series.createPriceLine(levelsLine1h)
+            })
+          }
+        }
+
+        if (props.chartDataParams.interval !== '1d') {
+          // Remove old lines 4h
+          if (tempLevels4h != null) {
+            tempLevels4h.forEach((element) => {
+              series.removePriceLine(element)
+            })
+          }
+
+          // Create lines 4h
+          const lines4h = data.fourHours[props.chartDataParams.ticker]
+          if (lines4h !== undefined) {
+            tempLevels4h = lines4h
+
+            lines4h.forEach((element) => {
+              let levelsLine4h = {
+                price: element,
+                color: 'rgba(240,116,39,0.5)',
+                lineWidth: 1,
+                lineStyle: 0,
+                axisLabelVisible: true,
+                title: '4h',
+              }
+
+              series.createPriceLine(levelsLine4h)
+            })
+          }
+        }
+
+        // Remove old lines 1d
+        if (tempLevels1d != null) {
+          tempLevels1d.forEach((element) => {
+            series.removePriceLine(element)
+          })
+        }
+
+        // Create lines 1d
+        const lines1d = data.oneDay[props.chartDataParams.ticker]
+        if (lines1d !== undefined) {
+          tempLevels1d = lines1d
+
+          lines1d.forEach((element) => {
+            let levelsLine1d = {
+              price: element,
+              color: 'rgba(146,39,36,0.5)',
+              lineWidth: 1,
+              lineStyle: 0,
+              axisLabelVisible: true,
+              title: '1d',
+            }
+
+            series.createPriceLine(levelsLine1d)
+          })
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    drawLevels()
+    setInterval(drawLevels, 1000 * 60)
   }
 }
 
