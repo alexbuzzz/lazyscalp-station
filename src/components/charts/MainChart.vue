@@ -219,7 +219,7 @@ const handleChart = async (mode, tic, int, lim) => {
 
     const drawLevels = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:2204')
+        const response = await fetch('http://92.38.131.13:2204')
         const data = await response.json()
 
         if (

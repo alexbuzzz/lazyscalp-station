@@ -45,7 +45,7 @@ onClickOutside(menu, () => (isMobileMenuOpen.value = false))
   right: 0;
   border: none;
   background: none;
-  z-index: 10;
+  z-index: 40;
   cursor: pointer;
   padding-top: 3px;
 }
